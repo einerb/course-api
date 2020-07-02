@@ -6,10 +6,10 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import mongoose from "mongoose";
-import { MongoMemoryServer } from "mongodb-memory-server";
 
 import errorHandler from "./utils/error-handler";
 import logger from "./utils/logger";
+import config from "./config/";
 
 // Create server express
 const app = express();
@@ -25,36 +25,13 @@ app.use(cors());
 app.use(errorHandler);
 
 // Connection to MongoDB
-const mongoServer = new MongoMemoryServer();
-
-mongoose.Promise = Promise;
-mongoServer
-  .getConnectionString()
-  .then((mongoUri) => {
-    const mongooseOpts = {
-      promiseLibrary: Promise,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    };
-
-    mongoose.connect(mongoUri, mongooseOpts);
-
-    mongoose.connection.on("error", (e) => {
-      if (e.message.code === "ETIMEDOUT") {
-        logger.error(e);
-        mongoose.connect(mongoUri, mongooseOpts);
-      }
-      logger.error(e);
-    });
-
-    mongoose.connection.once("open", async () => {
-      logger.info(`Database running on ${mongoUri}`);
-    });
-  })
-  .catch((err) => {
-    logger.error("Cannot connect to the database", err);
-    process.exit();
-  });
+mongoose.connect(config.URI + config.DB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+const db = mongoose.connection;
+db.on("error", (err) => logger.error("Cannot connect to the database", err));
+db.once("open", () => logger.info(`Database running on ${config.URI}`));
 
 // routes
 app.get("/", (req, res) => {

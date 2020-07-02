@@ -7,14 +7,14 @@ exports.getAll = async () => {
 };
 
 exports.getById = async (id) => {
-  return await Course.findById(id);
+  return await Course.findById(id).populate("students").exec();
 };
 
 exports.create = async (courseParam) => {
   if (await Course.findOne({ name: courseParam.name })) {
-    throw new Error("Name already exists!");
+    throw "Name already exists!";
   }
-  const student = new Course(courseParam);
+  const course = new Course(courseParam);
 
   // save course
   await course.save();
@@ -32,9 +32,7 @@ exports.update = async (id, courseParam) => {
     throw 'Name "' + courseParam.name + '" is already taken';
   }
 
-  await Course.findOneAndUpdate(course, courseParam, {
-    useFindAndModify: false,
-  });
+  await Object.assign(course, courseParam);
 
   await course.save();
 };

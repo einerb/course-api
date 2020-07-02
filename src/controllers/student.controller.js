@@ -62,3 +62,14 @@ exports._delete = (req, res, next) => {
     )
     .catch((err) => next(err));
 };
+
+exports.assignCourse = (req, res, next) => {
+  studentService
+    .assignCourse(req.params.id, req.body)
+    .then(() =>
+      res.status(200).json({
+        message: "Successfully assigned course!",
+      })
+    )
+    .catch((err) => next(err));
+};

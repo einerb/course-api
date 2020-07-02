@@ -8,7 +8,7 @@ const StudentSchema = mongoose.Schema(
     lastname: { type: String, required: true },
     birthday: { type: String, required: true },
     email: { type: String, required: true },
-    students: [{ type: Schema.Types.ObjectId, ref: "Course" }],
+    courses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
   },
   {
     timestamps: true,
