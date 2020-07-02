@@ -1,63 +1,63 @@
 "use strict";
 
-import studentService from "../services/student.service.model";
+import courseService from "../services/course.service.model";
 
 exports.create = (req, res, next) => {
-  studentService
+  courseService
     .create(req.body)
     .then(() =>
       res.status(200).json({
-        message: "Student successfully registered!",
+        message: "Course successfully registered!",
       })
     )
     .catch((err) => next(err));
 };
 
 exports.getAll = (req, res, next) => {
-  studentService
+  courseService
     .getAll()
-    .then((students) =>
+    .then((courses) =>
       res.status(200).json({
-        data: students,
-        message: "Successful student list!",
+        data: courses,
+        message: "Successful course list!",
       })
     )
     .catch((err) => next(err));
 };
 
 exports.getById = (req, res, next) => {
-  studentService
+  courseService
     .getById(req.params.id)
-    .then((student) =>
-      student
+    .then((course) =>
+      course
         ? res.status(200).json({
-            data: student,
-            message: "Successful student list!",
+            data: course,
+            message: "Successful course list!",
           })
         : res.status(404).json({
-            message: "Student not found!",
+            message: "Course not found!",
           })
     )
     .catch((err) => next(err));
 };
 
 exports.update = (req, res, next) => {
-  studentService
+  courseService
     .update(req.params.id, req.body)
     .then(() =>
       res.status(200).json({
-        message: "Student successfully updated!",
+        message: "Successfully updated course!",
       })
     )
     .catch((err) => next(err));
 };
 
 exports._delete = (req, res, next) => {
-  studentService
+  courseService
     ._delete(req.params.id)
     .then(() =>
       res.status(200).json({
-        message: "student successfully deleted!",
+        message: "Course successfully deleted!",
       })
     )
     .catch((err) => next(err));

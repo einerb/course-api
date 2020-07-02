@@ -32,7 +32,7 @@ exports.update = async (id, studentParam) => {
     throw 'Email "' + studentParam.email + '" is already taken';
   }
 
-  await User.findOneAndUpdate(student, studentParam, {
+  await Student.findOneAndUpdate(student, studentParam, {
     useFindAndModify: false,
   });
 
