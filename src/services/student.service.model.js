@@ -4,11 +4,15 @@ import Student from "../models/student.model";
 import Course from "../models/course.model";
 
 exports.getAll = async () => {
-  return await Student.find();
+  return await Student.find().populate("courses").exec();
 };
 
 exports.getById = async (id) => {
   return await Student.findById(id).populate("courses").exec();
+};
+
+exports.countStudents = async (id) => {
+  return await Student.find({ courses: id }).countDocuments();
 };
 
 exports.create = async (studentParam) => {

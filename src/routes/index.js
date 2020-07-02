@@ -10,9 +10,10 @@ module.exports = (app) => {
   router.post("/students/create", studentController.create);
   router.get("/students/", studentController.getAll);
   router.get("/students/:id", studentController.getById);
+  router.get("/students/count/:id", studentController.countStudents);
   router.put("/students/update/:id", studentController.update);
-  router.delete("/students/delete/:id", studentController._delete);
   router.put("/students/assign/:id", studentController.assignCourse);
+  router.delete("/students/delete/:id", studentController._delete);
 
   // Course Routes
   router.post("/courses/create", courseController.create);

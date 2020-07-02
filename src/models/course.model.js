@@ -8,7 +8,6 @@ const CourseSchema = mongoose.Schema(
     schedule: { type: String, required: true },
     start_date: { type: Date, default: Date.now },
     end_date: { type: Date },
-    students: [{ type: mongoose.Schema.Types.ObjectId, ref: "Student" }],
   },
   {
     timestamps: true,

@@ -41,6 +41,19 @@ exports.getById = (req, res, next) => {
     .catch((err) => next(err));
 };
 
+
+exports.countStudents = (req, res, next) => {
+  studentService
+    .countStudents(req.params.id)
+    .then((course) => {
+      res.status(200).json({
+        data: course,
+        message: "Number of students associated with the course!",
+      });
+    })
+    .catch((err) => next(err));
+};
+
 exports.update = (req, res, next) => {
   studentService
     .update(req.params.id, req.body)

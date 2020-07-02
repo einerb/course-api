@@ -7,7 +7,7 @@ exports.getAll = async () => {
 };
 
 exports.getById = async (id) => {
-  return await Course.findById(id).populate("students").exec();
+  return await Course.findById(id);
 };
 
 exports.create = async (courseParam) => {
