@@ -38,5 +38,5 @@ exports.update = async (id, courseParam) => {
 };
 
 exports._delete = async (id) => {
-  await Course.findOneAndDelete(id, { useFindAndModify: false });
+  await Course.deleteOne({ _id: id });
 };
