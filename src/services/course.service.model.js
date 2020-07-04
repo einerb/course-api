@@ -3,7 +3,7 @@
 import Course from "../models/course.model";
 
 exports.getAll = async () => {
-  return await Course.find();
+  return await Course.find().sort({ createdAt: -1 }).limit(10);
 };
 
 exports.getById = async (id) => {

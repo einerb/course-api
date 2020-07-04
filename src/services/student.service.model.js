@@ -4,7 +4,7 @@ import Student from "../models/student.model";
 import Course from "../models/course.model";
 
 exports.getAll = async () => {
-  return await Student.find().populate("courses").exec();
+  return await Student.find().sort({ createdAt: -1 }).populate("courses").exec();
 };
 
 exports.getById = async (id) => {

@@ -25,7 +25,7 @@ app.use(cors());
 app.use(errorHandler);
 
 // Connection to MongoDB
-mongoose.connect(config.URI + config.DB, {
+mongoose.connect("mongodb+srv://root:8pr93X8rrTle2HW8@courses-dev.gckqf.mongodb.net/courses?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
