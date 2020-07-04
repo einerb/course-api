@@ -41,7 +41,6 @@ exports.getById = (req, res, next) => {
     .catch((err) => next(err));
 };
 
-
 exports.countStudents = (req, res, next) => {
   studentService
     .countStudents(req.params.id)

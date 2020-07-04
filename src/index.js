@@ -30,8 +30,8 @@ mongoose.connect(config.URI + config.DB, {
   useUnifiedTopology: true,
 });
 const db = mongoose.connection;
-db.on("error", (err) => logger.error("Cannot connect to the database", err));
-db.once("open", () => logger.info(`Database running on ${config.URI}`));
+db.on("error", (err) => logger.error("👉 Cannot connect to the database", err));
+db.once("open", () => logger.info(`👉 Database running on ${config.URI}`));
 
 // routes
 app.get("/", (req, res) => {
@@ -44,5 +44,5 @@ const port =
 
 // Start server
 app.listen(port, () => {
-  logger.info(`Server ready at http://localhost:${port}`);
+  logger.info(`👉 Server ready at http://localhost:${port}`);
 });
